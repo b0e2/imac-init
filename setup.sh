@@ -170,12 +170,28 @@ step_configure_zshrc() {
         return 0
     fi
 
+    # Oh My Zsh 설치 과정에서 .zshrc를 자체 템플릿으로 덮어쓰기 때문에,
+    # 이 스크립트에서 .zshrc를 손대는 건 반드시 oh-my-zsh 단계 이후여야 함.
+    cp "$zshrc" "$zshrc.bak.$(date +%Y%m%d%H%M%S)"
+
     info ".zshrc 플러그인 설정 중..."
     if grep -q "^plugins=" "$zshrc"; then
-        cp "$zshrc" "$zshrc.bak.$(date +%Y%m%d%H%M%S)"
         sed -i '' 's/^plugins=(.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' "$zshrc" \
-            && ok ".zshrc 플러그인 설정 업데이트 완료 (변경 전 파일 백업됨)" \
-            || warn ".zshrc 업데이트 실패"
+            && ok ".zshrc 플러그인 설정 업데이트 완료" \
+            || warn ".zshrc 플러그인 업데이트 실패"
+    fi
+
+    info "~/.local/bin PATH 설정 중... (herdr 등 로컬 바이너리용)"
+    local path_line='export PATH="$HOME/.local/bin:$PATH"'
+    if grep -qF "$path_line" "$zshrc"; then
+        ok "~/.local/bin PATH 이미 설정되어 있음"
+    else
+        {
+            echo ""
+            echo "# ~/.local/bin 바이너리(herdr 등)를 위한 PATH 추가 (imac-init)"
+            echo "$path_line"
+        } >> "$zshrc"
+        ok "~/.local/bin PATH 추가 완료 (새 터미널부터 적용됨, 지금 창은 'source ~/.zshrc' 필요)"
     fi
 }
 

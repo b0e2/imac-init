@@ -4,8 +4,8 @@ Intel iMac 개발 환경 초기 세팅 스크립트. sudo 권한 불필요, 매�
 
 ## 하는 일
 
-- **앱 설치** (`~/Applications`): iTerm2, Ghostty, Herdr
-- **zsh 환경**: Oh My Zsh, zsh-autosuggestions, zsh-syntax-highlighting, `.zshrc` 플러그인 설정
+- **앱 설치**: Herdr
+- **zsh 환경**: Oh My Zsh, zsh-autosuggestions, zsh-syntax-highlighting, `.zshrc` 플러그인 설정, `~/.local/bin` PATH 등록
 - **한글 입력기**: Gureum 2벌식 활성화, 나머지 하위 모드 비활성화
 - **키보드**: CapsLock → 한영 전환(Fn) 매핑 (재부팅 후에도 유지되도록 LaunchAgent 등록)
 - **Spotlight**: 단축키 기본값(⌘Space) 복원
@@ -47,6 +47,11 @@ GHOSTTY_VERSION="1.3.1"
 - macOS (Intel/Apple Silicon 무관하게 동작하지만 CapsLock 매핑·한글 입력기 부분은 Intel iMac 기준으로 검증됨)
 - Gureum 입력기가 미리 설치되어 있어야 한글 입력기 단계가 정상 동작함
 - 시스템 기본 `/bin/bash`(3.2)로 실행됨 — associative array 등 최신 bash 문법 안 씀
+
+## 알려진 이슈
+
+- 재단 네트워크에서는 `iterm2.com`, `release.files.ghostty.org` 도메인이 막혀 있어 iTerm2·Ghostty는 다운로드가 안 됨. 스크립트 코드 자체엔 여전히 포함되어 있으니, 다른 네트워크(핫스팟 등)에서 `bash setup.sh --only apps` 로 나중에 따로 설치하면 됨.
+- herdr 설치 직후 `command not found: herdr`가 뜨면 `~/.local/bin`이 아직 PATH에 안 잡힌 것 — `zshrc` 단계까지 실행됐다면 새 터미널을 열거나 `source ~/.zshrc` 하면 해결됨.
 
 ## 새 단계 추가하기
 
