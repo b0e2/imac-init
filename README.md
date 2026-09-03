@@ -15,7 +15,7 @@ Intel iMac 개발 환경 초기 세팅 스크립트. sudo 권한 불필요, 매�
 ## 사용법
 
 ```bash
-git clone <repo-url> imac-init
+git clone https://github.com/b0e2/imac-init.git imac-init
 cd imac-init
 bash setup.sh
 ```
