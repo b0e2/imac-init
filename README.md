@@ -9,6 +9,7 @@ Intel iMac 개발 환경 초기 세팅 스크립트. sudo 권한 불필요, 매�
 - **한글 입력기**: Gureum 2벌식 활성화, 나머지 하위 모드 비활성화
 - **키보드**: CapsLock → 한영 전환(Fn) 매핑 (재부팅 후에도 유지되도록 LaunchAgent 등록)
 - **Spotlight**: 단축키 기본값(⌘Space) 복원
+- **Finder**: 숨김 파일·전체 확장자 표시, 경로·상태 막대 표시, 기본 보기를 목록으로 설정
 - **Dock**: 최근 사용 앱 숨김, 기본 앱 아이콘 제거
 - **Git**: `user.name` / `user.email` / `init.defaultBranch` 전역 설정
 
