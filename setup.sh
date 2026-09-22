@@ -342,6 +342,21 @@ PLIST
 }
 
 # =============================================================================
+# Finder 설정
+# =============================================================================
+
+step_setup_finder() {
+    info "Finder 설정 중..."
+    defaults write com.apple.finder AppleShowAllFiles -bool true
+    defaults write com.apple.finder ShowPathbar -bool true
+    defaults write com.apple.finder ShowStatusBar -bool true
+    defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+    defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+    killall Finder 2>/dev/null || true
+    ok "Finder 설정 완료 (숨김 파일/확장자 표시, 경로·상태 막대, 목록 보기)"
+}
+
+# =============================================================================
 # Dock 설정
 # =============================================================================
 
@@ -375,9 +390,10 @@ if [[ "$(uname)" != "Darwin" ]]; then
 fi
 
 # 인덱스가 서로 짝을 이루는 두 배열 (bash 3.2 호환, associative array 안 씀)
-STEP_NAMES=(apps oh-my-zsh zsh-plugins zshrc korean-input spotlight capslock dock git)
+STEP_NAMES=(apps oh-my-zsh zsh-plugins zshrc korean-input spotlight capslock finder dock git)
 STEP_FUNCS=(step_install_apps step_install_oh_my_zsh step_install_zsh_plugins step_configure_zshrc \
-            step_setup_korean_input step_setup_spotlight step_setup_capslock step_setup_dock step_configure_git)
+            step_setup_korean_input step_setup_spotlight step_setup_capslock step_setup_finder \
+            step_setup_dock step_configure_git)
 
 DRY_RUN=0
 ONLY=""
